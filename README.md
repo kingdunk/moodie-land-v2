@@ -85,7 +85,6 @@ Assets/
 │   ├── Characters/          # CharacterView（表情 + 反馈动画）
 │   ├── Levels/              # Level01/02/03, Harbor, MainMenu, StoryIntro, Ending, SceneBase
 │   └── Data/                # CardLibrary（图标查表）
-└── Editor/MoodieArt, Editor/MoodieBuild   # 美术生成器 + 场景生成器
 ```
 
 场景内层级（以 Level01 为例）：
