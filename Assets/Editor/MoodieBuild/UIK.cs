@@ -120,10 +120,10 @@ namespace MoodieLand.EditorTools
             btn.targetGraphic = img;
             var colors = btn.colors;
             colors.normalColor = Color.white;
-            colors.highlightedColor = new Color(1f, 1f, 1f, 0.93f);
-            colors.pressedColor = new Color(0.9f, 0.9f, 0.9f, 1f);
-            colors.selectedColor = Color.white;
-            colors.disabledColor = new Color(0.85f, 0.85f, 0.85f, 0.6f);
+            colors.highlightedColor = new Color(0.94f, 0.97f, 0.94f, 1f);
+            colors.pressedColor = new Color(0.86f, 0.89f, 0.86f, 1f);
+            colors.selectedColor = colors.highlightedColor;
+            colors.disabledColor = new Color(0.82f, 0.84f, 0.82f, 0.88f);
             colors.fadeDuration = 0.08f;
             btn.colors = colors;
 

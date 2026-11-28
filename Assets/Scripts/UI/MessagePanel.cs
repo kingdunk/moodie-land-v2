@@ -24,6 +24,9 @@ namespace MoodieLand
         public Image cardBackground;
 
         Action onShare, onPrivate, onChange;
+        Coroutine fade;
+
+        public bool IsVisible => group != null && group.alpha > 0f;
 
         void Awake()
         {
@@ -59,7 +62,7 @@ namespace MoodieLand
             {
                 group.blocksRaycasts = true;
                 group.interactable = true;
-                StartCoroutine(UIFx.FadeGroup(group, group.alpha, 1f, 0.25f));
+                FadeTo(1f, 0.25f);
                 if (card != null) StartCoroutine(UIFx.Pop(card, 0.88f, 1f, 0.4f));
             }
         }
@@ -69,14 +72,23 @@ namespace MoodieLand
             if (group == null) return;
             group.blocksRaycasts = false;
             group.interactable = false;
-            StartCoroutine(UIFx.FadeGroup(group, group.alpha, 0f, 0.2f));
+            FadeTo(0f, 0.2f);
         }
 
         public void HideImmediate()
         {
             if (group == null) return;
+            if (fade != null) StopCoroutine(fade);
+            fade = null;
             group.alpha = 0f;
             group.blocksRaycasts = false;
+            group.interactable = false;
+        }
+
+        void FadeTo(float alpha, float duration)
+        {
+            if (fade != null) StopCoroutine(fade);
+            fade = StartCoroutine(UIFx.FadeGroup(group, group.alpha, alpha, duration));
         }
     }
 }

@@ -23,27 +23,34 @@ namespace MoodieLand
         Vector2 restingPosition;
         float started;
 
-        protected override void OnEnable()
+        const float Cycle = 5.4f;
+
+        void StartMotion()
         {
-            base.OnEnable();
             image = GetComponent<Image>();
             restingPosition = image.rectTransform.anchoredPosition;
             started = Time.unscaledTime;
-            if (motionShader == null || !motionShader.isSupported)
-                return;
-
             originalMaterial = image.material;
-            animatedMaterial = new Material(motionShader);
+            animatedMaterial = new Material(motionShader) { hideFlags = HideFlags.HideAndDontSave };
             animatedMaterial.SetFloat(CharacterType, (float)character);
             if (pose != null)
                 animatedMaterial.SetTexture(PoseTexture, pose.texture);
             image.material = animatedMaterial;
+            image.SetVerticesDirty();
         }
 
         void LateUpdate()
         {
-            if (animatedMaterial == null)
+            if (!Application.IsPlaying(gameObject))
                 return;
+
+            if (animatedMaterial == null)
+            {
+                if (motionShader == null || !motionShader.isSupported)
+                    return;
+
+                StartMotion();
+            }
 
             float elapsed = Time.unscaledTime - started;
             Vector4 motion = Vector4.zero;
@@ -51,25 +58,26 @@ namespace MoodieLand
             switch (character)
             {
                 case Character.Pip:
-                    float wave = Mathf.Repeat(elapsed - 0.65f, 3.5f);
-                    motion.x = Envelope(wave, 1.35f, 0.17f);
-                    motion.y = Mathf.Sin(wave * 15f) * motion.x;
+                    float wave = Mathf.Repeat(elapsed - 0.55f, Cycle);
+                    motion.x = Mathf.Sin(wave * 12.57f) * Envelope(wave, 1.05f, 0.16f);
+                    motion.w = pose == null ? 1f : Envelope(wave, 1.25f, 0.12f);
                     break;
                 case Character.Mimi:
-                    motion.x = Mathf.Sin(elapsed * 4.8f) * SmoothRamp(elapsed / 0.4f);
+                    motion.x = Mathf.Sin(elapsed * 2.7f) * SmoothRamp(elapsed / 0.6f);
                     break;
                 case Character.Bobo:
-                    float jump = Mathf.Repeat(elapsed - 1.05f, 2.65f);
+                    float jump = Mathf.Repeat(elapsed - 2.1f, Cycle);
                     float height = Mathf.Clamp01(jump / 0.76f);
                     image.rectTransform.anchoredPosition = restingPosition
-                        + Vector2.up * (88f * height * (1f - height) * 4f);
-                    motion.x = Envelope(jump, 0.76f, 0.13f);
-                    motion.y = Mathf.Sin(jump * 21f) * motion.x;
+                        + Vector2.up * (45f * height * (1f - height) * 4f);
+                    motion.x = pose == null ? 0f : Envelope(jump, 0.76f, 0.13f);
+                    motion.y = Mathf.Sin(jump * 19f) * Envelope(jump, 1.05f, 0.23f);
+                    motion.z = Mathf.Sin(jump * 19f) * motion.x;
                     break;
                 case Character.Nunu:
-                    float smile = Mathf.Repeat(elapsed - 1.55f, 3.9f);
-                    motion.x = Envelope(smile, 0.23f, 0.07f);
-                    motion.y = Envelope(smile, 1.05f, 0.16f);
+                    float smile = Mathf.Repeat(elapsed - 3.75f, Cycle);
+                    motion.x = pose == null ? 0f : Envelope(smile, 0.23f, 0.07f);
+                    motion.y = pose == null ? 0f : Envelope(smile - 0.18f, 1.05f, 0.16f);
                     break;
             }
 
@@ -82,15 +90,19 @@ namespace MoodieLand
             if (animatedMaterial == null)
                 return;
 
-            image.rectTransform.anchoredPosition = restingPosition;
+            if (character == Character.Bobo)
+                image.rectTransform.anchoredPosition = restingPosition;
             image.material = originalMaterial;
-            Destroy(animatedMaterial);
+            if (Application.isPlaying)
+                Destroy(animatedMaterial);
+            else
+                DestroyImmediate(animatedMaterial);
             animatedMaterial = null;
         }
 
         public override void ModifyMesh(VertexHelper mesh)
         {
-            if (!IsActive() || animatedMaterial == null || mesh.currentVertCount != 4)
+            if (!Application.IsPlaying(gameObject) || !IsActive() || animatedMaterial == null || mesh.currentVertCount != 4)
                 return;
 
             // An Image can trim the transparent margins of its standing sprite.

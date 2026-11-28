@@ -79,6 +79,28 @@ namespace MoodieLand
             }
 
             ClearHint();
+            var pip = Find("pip");
+            if (pip != null)
+                StartCoroutine(BlinkWhileWaiting(pip, firstVisit));
+        }
+
+        IEnumerator BlinkWhileWaiting(CharacterView pip, bool greet)
+        {
+            if (greet)
+            {
+                pip.SetExpression("inviting");
+                yield return Hold(0.8f);
+                if (pip == null) yield break;
+            }
+            pip.SetExpression("idle", false);
+            while (pip != null)
+            {
+                yield return Hold(3.8f);
+                if (pip == null) yield break;
+                pip.SetExpression("blink", false);
+                yield return Hold(0.14f);
+                if (pip != null) pip.SetExpression("idle", false);
+            }
         }
 
         void RefreshMap()
@@ -112,12 +134,7 @@ namespace MoodieLand
             bool all = ProgressManager.I != null && ProgressManager.I.AllCompleted;
 
             if (endingButton != null)
-            {
                 endingButton.interactable = all;
-                var img = endingButton.GetComponent<Image>();
-                if (img != null)
-                    img.color = all ? Color.white : new Color(1f, 1f, 1f, 0.55f);
-            }
 
             if (endingLabel != null)
                 endingLabel.text = all ? "Visit the Mood Tree" : "Mood Tree (visit all 3 places)";

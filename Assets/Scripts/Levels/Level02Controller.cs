@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MoodieLand
@@ -13,13 +12,10 @@ namespace MoodieLand
     {
         [Header("Content")]
         public CardLibrary lib;
-        public ClickableProp sourceBlock;
-        public ClickableProp castleSlot;
+        public TaskTwoCastlePuzzle taskTwoPuzzle;
         public GameObject[] stageCastle;
         public GameObject[] stageBroken;
-        public GameObject[] stageBlocks;
         public GameObject[] castleBlocks = new GameObject[0];
-        public RectTransform blockFlight;
 
         protected override IEnumerator Flow()
         {
@@ -37,7 +33,7 @@ namespace MoodieLand
 
             yield return Say(
                 DialogueLine.Narrator("The cloud boat lands beside a village built from giant toy blocks."),
-                new DialogueLine("bobo", "Bobo", "Hi! I'm Bobo. I'm building a block castle. Would you like to play with me?", "idle"),
+                new DialogueLine("bobo", "Bobo", "Hi! I'm Bobo. I'm building a block castle. Would you like to play with me?", "waving"),
                 new DialogueLine("pip", "Pip", "There is no single right answer. Say what you really want.", "waving")
             );
 
@@ -52,7 +48,7 @@ namespace MoodieLand
         {
             Toggle(stageCastle, index == 0);
             Toggle(stageBroken, index == 1);
-            Toggle(stageBlocks, index == 2);
+            taskTwoPuzzle.gameObject.SetActive(index == 2);
             foreach (var b in castleBlocks)
                 if (b != null) b.SetActive(false);
         }
@@ -64,13 +60,29 @@ namespace MoodieLand
                 if (go != null) go.SetActive(on);
         }
 
-        IEnumerator BuildBlocks(float delay = 0.22f)
+        IEnumerator BuildBlocks(float delay, float placementDuration = 0f)
         {
-            foreach (var b in castleBlocks)
+            var bobo = Find("bobo");
+            if (bobo != null) bobo.SetExpression("building", restart: true);
+            for (int i = 0; i < castleBlocks.Length; i++)
             {
-                if (b == null) continue;
-                b.SetActive(true);
-                StartCoroutine(UIFx.Pop(b.transform, 0.4f, 1f, 0.3f));
+                var piece = castleBlocks[i];
+                if (piece == null) continue;
+
+                if (placementDuration > 0f && piece.transform is RectTransform block)
+                {
+                    Vector2 landing = block.anchoredPosition;
+                    float approachX = i % 2 == 0 ? -42f : 42f;
+                    block.anchoredPosition = landing + new Vector2(approachX, 110f);
+                    piece.SetActive(true);
+                    yield return UIFx.MoveAnchored(block, landing, placementDuration);
+                }
+                else
+                {
+                    piece.SetActive(true);
+                    StartCoroutine(UIFx.Pop(piece.transform, 0.4f, 1f, 0.3f));
+                }
+
                 yield return Hold(delay);
             }
         }
@@ -98,7 +110,7 @@ namespace MoodieLand
                 case "accept":
                     yield return Say(new DialogueLine("bobo", "Bobo", "Yay! Let's build together!", "happy"));
                     SetHint("");
-                    yield return BuildBlocks(0.18f);
+                    yield return BuildBlocks(0.07f, placementDuration: 0.34f);
                     yield return Say(new DialogueLine("bobo", "Bobo", "You put the blue block on top. It looks great!", "happy"));
                     Praise("You joined in!");
                     break;
@@ -108,7 +120,7 @@ namespace MoodieLand
                         new DialogueLine("bobo", "Bobo", "Sure! Watch me first.", "calm"),
                         new DialogueLine("bobo", "Bobo", "I put a big block at the bottom, then smaller ones on top.", "building"));
                     SetHint("");
-                    yield return BuildBlocks(0.3f);
+                    yield return BuildBlocks(0.12f, placementDuration: 0.44f);
                     yield return Say(
                         new DialogueLine("bobo", "Bobo", "What do you think?", "listening"),
                         new DialogueLine("pip", "Pip", "Watching first is a good way to feel ready.", "idle"));
@@ -138,6 +150,8 @@ namespace MoodieLand
         {
             LogStart("Task2");
             SetStage(2);
+            var bobo = Find("bobo");
+            if (bobo != null) bobo.SetExpression("building");
             SetTaskIndex(1, 3, "Task 2 · Let's Take Turns");
             yield return Banner("Task 2", "Let's Take Turns!");
             SetHint("There are kind ways and rushed ways to ask for a turn. Try one and see.");
@@ -168,17 +182,17 @@ namespace MoodieLand
                 {
                     case "whendone":
                         yield return Say(
-                            new DialogueLine("bobo", "Bobo", "Sure! I'll tell you when I'm done.", "happy"));
+                            new DialogueLine("bobo", "Bobo", "Sure! I'll tell you when I'm done.", "building"));
                         yield return Hold(0.6f);
                         yield return Say(
-                            new DialogueLine("bobo", "Bobo", "Done! Here you go.", "happy"));
+                            new DialogueLine("bobo", "Bobo", "Done! Here you go.", "offering"));
                         Praise("Asking and waiting works!");
                         done = true;
                         break;
 
                     case "turns":
                         yield return Say(
-                            new DialogueLine("bobo", "Bobo", "Great idea! You go first, then me.", "happy"),
+                            new DialogueLine("bobo", "Bobo", "Great idea! You go first, then me.", "offering"),
                             new DialogueLine("bobo", "Bobo", "Taking turns is fair for both of us.", "calm"));
                         Praise("Taking turns feels fair.");
                         done = true;
@@ -196,7 +210,7 @@ namespace MoodieLand
                         {
                             negotiated = true;
                             yield return Say(
-                                new DialogueLine("bobo", "Bobo", "I'm still using it. Please wait a little.", "listening"),
+                                new DialogueLine("bobo", "Bobo", "I'm still using it. Please wait a little.", "building"),
                                 new DialogueLine("pip", "Pip", "That did not work. Let's try another way to ask.", "thinking"));
                             Gentle("Let's try a different way to ask.");
                             LogChoice("Task2", "Now_Retry", "negotiation");
@@ -213,65 +227,28 @@ namespace MoodieLand
                 }
             }
 
-            // ---- place the block: click the block, then the empty castle spot
-            ClearHint();
-            SetHint("Tap the blue block, then tap the empty space on the castle.");
-            if (sourceBlock != null) sourceBlock.SetInteractable(false);
-            if (castleSlot != null) castleSlot.SetInteractable(false);
+            SetHint("Drag a block from the tray to its matching shape. You can also tap the block, then tap its spot. Take turns with Bobo.");
+            if (bobo != null) bobo.SetExpression("calm");
+            taskTwoPuzzle.ShowTray();
 
-            yield return Say(new DialogueLine("pip", "Pip", "Now you have a turn. Tap the blue block, then tap the empty space on the castle.", "pointing"));
-
-            if (sourceBlock != null)
-            {
-                sourceBlock.SetInteractable(true);
-                yield return WaitProp(sourceBlock);
-                sourceBlock.SetInteractable(false);
-                sourceBlock.Punp();
-            }
-
-            if (castleSlot != null)
-            {
-                castleSlot.SetInteractable(true);
-                castleSlot.SetHighlighted(true);
-                yield return WaitProp(castleSlot);
-                castleSlot.SetInteractable(false);
-                castleSlot.SetHighlighted(false);
-            }
-
-            yield return PlaceBlock();
+            yield return Say(new DialogueLine("pip", "Pip", "Start with the blue block. Drag it to the matching spot, or tap the block and then tap its spot. Then it's Bobo's turn!", "pointing"));
+            yield return taskTwoPuzzle.Play(bobo);
 
             yield return Say(
-                new DialogueLine("bobo", "Bobo", "It fits! Our castle is getting taller.", "happy"),
-                new DialogueLine("pip", "Pip", "You asked, waited and shared. That is real communication.", "happy"));
+                new DialogueLine("bobo", "Bobo", "It fits! We finished our castle together.", "happy"),
+                new DialogueLine("pip", "Pip", "You asked, waited and shared. That is real communication.", "nodding"));
 
             LogDone("Task2");
             ClearHint();
         }
 
-        IEnumerator PlaceBlock()
-        {
-            AudioManager.I?.PlayPop();
-            if (blockFlight != null)
-            {
-                blockFlight.gameObject.SetActive(true);
-                StartCoroutine(UIFx.Pop(blockFlight, 0.5f, 1f, 0.35f));
-            }
-            if (sourceBlock != null) sourceBlock.SetVisible(false);
-            if (castleSlot != null && castleSlot.image != null)
-                castleSlot.image.color = new Color(1f, 1f, 1f, 0f);
-
-            yield return Hold(0.35f);
-
-            if (blockFlight != null)
-            {
-                // keeps the placed block visible on the castle from now on
-                var rt = blockFlight;
-                rt.localScale = Vector3.one;
-            }
-            yield return Hold(0.2f);
-        }
-
         // ----------------------------------------------------------- task three
+
+        IEnumerator RebuildCastle(float delay)
+        {
+            Toggle(stageBroken, false);
+            yield return BuildBlocks(delay);
+        }
 
         IEnumerator TaskThree()
         {
@@ -305,7 +282,7 @@ namespace MoodieLand
                         new DialogueLine("bobo", "Bobo", "Yes, please!", "happy"),
                         new DialogueLine("bobo", "Bobo", "You hold the bottom and I will put the top on.", "building"));
                     SetHint("");
-                    yield return BuildBlocks(0.2f);
+                    yield return RebuildCastle(0.2f);
                     yield return Say(new DialogueLine("bobo", "Bobo", "We did it together! Thank you for helping.", "happy"));
                     Praise("Helping was welcome!");
                     break;
@@ -316,7 +293,7 @@ namespace MoodieLand
                         new DialogueLine("pip", "Pip", "Sometimes helping means giving space.", "idle"),
                         new DialogueLine("bobo", "Bobo", "I'll try again... slowly...", "building"));
                     SetHint("");
-                    yield return BuildBlocks(0.35f);
+                    yield return RebuildCastle(0.35f);
                     yield return Say(
                         new DialogueLine("bobo", "Bobo", "I did it! Thank you for waiting with me.", "happy"));
                     Praise("Waiting is a kind of help.");
@@ -328,7 +305,7 @@ namespace MoodieLand
                         new DialogueLine("pip", "Pip", "A break can make the next try easier.", "calm"),
                         new DialogueLine("bobo", "Bobo", "Okay, I feel better now. Let's try again.", "happy"));
                     SetHint("");
-                    yield return BuildBlocks(0.2f);
+                    yield return RebuildCastle(0.2f);
                     break;
 
                 default:
@@ -336,11 +313,11 @@ namespace MoodieLand
                         new DialogueLine("bobo", "Bobo", "That helps. I know you are here.", "calm"),
                         new DialogueLine("bobo", "Bobo", "I'll try again... and I did it!", "happy"));
                     SetHint("");
-                    yield return BuildBlocks(0.25f);
+                    yield return RebuildCastle(0.25f);
                     break;
             }
 
-            yield return Say(new DialogueLine("bobo", "Bobo", "The castle is standing again. Thank you for talking with me.", "happy"));
+            yield return Say(new DialogueLine("bobo", "Bobo", "The castle is standing again. Thank you for talking with me.", "clapping"));
             LogDone("Task3");
             ClearHint();
         }

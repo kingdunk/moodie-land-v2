@@ -140,8 +140,23 @@ namespace MoodieLand
 
             for (int i = 0; i < everyone.Length; i++)
             {
-                if (everyone[i] == null) continue;
-                everyone[i].SetExpression("happy");
+                var friend = everyone[i];
+                if (friend == null) continue;
+                switch (friend.characterKey)
+                {
+                    case "pip":
+                        friend.SetExpression("waving");
+                        break;
+                    case "mimi":
+                    case "bobo":
+                        friend.SetExpression("celebrating");
+                        break;
+                    default:
+                        friend.SetExpression("happy");
+                        break;
+                }
+                if (i + 1 < everyone.Length)
+                    yield return Hold(0.16f);
             }
         }
 
@@ -174,7 +189,7 @@ namespace MoodieLand
             while (treeGlow != null)
             {
                 t += Time.unscaledDeltaTime;
-                c.a = 0.35f + (Mathf.Sin(t * 1.6f) * 0.5f + 0.5f) * 0.4f;
+                c.a = 0.13f + (Mathf.Sin(t * 1.6f) * 0.5f + 0.5f) * 0.13f;
                 treeGlow.color = c;
                 yield return null;
             }

@@ -86,6 +86,10 @@ namespace MoodieLand.EditorTools
         static readonly string[] MimiExpressions = { "idle", "searching", "worried", "frustrated", "happy", "calm" };
         static readonly string[] BoboExpressions = { "idle", "building", "listening", "happy", "calm", "disappointed" };
         static readonly string[] NunuExpressions = { "idle", "listening", "thinking", "worried", "relieved", "calm" };
+        static readonly string[] WatercolorPip = { "nodding", "inviting", "blink" };
+        static readonly string[] WatercolorMimi = { "celebrating" };
+        static readonly string[] WatercolorBobo = { "offering", "waving", "clapping", "celebrating" };
+        static readonly string[] WatercolorNunu = { "happy" };
 
         public static string[] ExpressionsFor(string key)
         {
@@ -96,6 +100,50 @@ namespace MoodieLand.EditorTools
                 case "nunu": return NunuExpressions;
                 default: return PipExpressions;
             }
+        }
+
+        public static IEnumerable<string> WatercolorExpressionsFor(string key)
+        {
+            foreach (string expression in ExpressionsFor(key))
+                yield return expression;
+
+            string[] extras = key switch
+            {
+                "bobo" => WatercolorBobo,
+                "mimi" => WatercolorMimi,
+                "nunu" => WatercolorNunu,
+                _ => WatercolorPip
+            };
+            foreach (string expression in extras)
+                yield return expression;
+        }
+
+        public static Sprite GetWatercolorCharacter(string key, string expression, bool head, string idleArt)
+        {
+            string asset = (key, expression) switch
+            {
+                ("pip", "idle") => idleArt ?? "pip_idle",
+                ("pip", "calm") => "pip_idle",
+                ("pip", "happy") => "pip_nodding",
+                ("pip", "waving") => "pip_menu",
+                ("mimi", "idle") => "mimi_calm",
+                ("mimi", "happy" or "celebrating") => "mimi_menu",
+                ("bobo", "waving") => "bobo_wave",
+                ("bobo", "clapping" or "celebrating") => "bobo_happy",
+                ("bobo" or "nunu", "idle") => key + "_menu",
+                _ => key + "_" + expression
+            };
+            if (head)
+            {
+                asset = asset switch
+                {
+                    "pip_menu" or "mimi_menu" => key + "_original_head",
+                    "pip_waiting" or "pip_blink" => "pip_idle_head",
+                    "bobo_wave" => "bobo_menu_head",
+                    _ => asset + "_head"
+                };
+            }
+            return Get("Characters/NewWatercolor/" + asset);
         }
 
         static void Props()
@@ -168,41 +216,50 @@ namespace MoodieLand.EditorTools
             foreach (var s in symbols)
             {
                 string id = s;
-                Save("Icons/sym_" + id, () => { var c = new Canvas2D(256, 256, 2); UIAssets.SymbolIcon(c, id, Pal.Lav); return c; });
+                string key = "Icons/sym_" + id;
+                if (!File.Exists(FindPath(key)))
+                    Save(key, () => { var c = new Canvas2D(256, 256, 2); UIAssets.SymbolIcon(c, id, Pal.Lav); return c; });
             }
         }
 
         static void Surfaces()
         {
             // main dialogue / board panels (9-sliced, border 80)
-            Save("UI/ui_panel_cream", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Pal.Cream, Canvas2D.Hex("E9DAC6"), 46f, 6f, true); return c; }, 80);
-            Save("UI/ui_panel_white", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Pal.Paper, Canvas2D.Hex("EEE2D2"), 46f, 6f, true); return c; }, 80);
-            Save("UI/ui_panel_mint", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Canvas2D.Hex("F0FBF7"), Canvas2D.Hex("C9E9E2"), 46f, 6f, true); return c; }, 80);
-            Save("UI/ui_panel_lav", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Canvas2D.Hex("F6F4FC"), Canvas2D.Hex("DCD6F0"), 46f, 6f, true); return c; }, 80);
+            SaveSurfaceIfMissing("UI/ui_panel_cream", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Pal.Cream, Canvas2D.Hex("E9DAC6"), 46f, 6f, true); return c; }, 80);
+            SaveSurfaceIfMissing("UI/ui_panel_white", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Pal.Paper, Canvas2D.Hex("EEE2D2"), 46f, 6f, true); return c; }, 80);
+            SaveSurfaceIfMissing("UI/ui_panel_mint", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Canvas2D.Hex("F0FBF7"), Canvas2D.Hex("C9E9E2"), 46f, 6f, true); return c; }, 80);
+            SaveSurfaceIfMissing("UI/ui_panel_lav", () => { var c = new Canvas2D(256, 256, 2); UIAssets.Panel(c, Canvas2D.Hex("F6F4FC"), Canvas2D.Hex("DCD6F0"), 46f, 6f, true); return c; }, 80);
 
             // buttons
-            Save("UI/ui_btn_peach", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Pal.Peach, Pal.PeachDark, 34f, 5f, false); return c; }, 56);
-            Save("UI/ui_btn_teal", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Canvas2D.Hex("399C91"), Canvas2D.Hex("2C7A72"), 34f, 5f, false); return c; }, 56);
-            Save("UI/ui_btn_white", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Pal.White, Canvas2D.Hex("E6D9C7"), 34f, 5f, false); return c; }, 56);
-            Save("UI/ui_btn_sun", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Canvas2D.Hex("FFE08A"), Canvas2D.Hex("E9C368"), 34f, 5f, false); return c; }, 56);
-            Save("UI/ui_btn_ghost", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Canvas2D.Hex("FFFFFF", 0.55f), Canvas2D.Hex("FFFFFF", 0.85f), 34f, 4f, false); return c; }, 56);
+            SaveSurfaceIfMissing("UI/ui_btn_peach", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Pal.Peach, Pal.PeachDark, 34f, 5f, false); return c; }, 56);
+            SaveSurfaceIfMissing("UI/ui_btn_teal", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Canvas2D.Hex("399C91"), Canvas2D.Hex("2C7A72"), 34f, 5f, false); return c; }, 56);
+            SaveSurfaceIfMissing("UI/ui_btn_white", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Pal.White, Canvas2D.Hex("E6D9C7"), 34f, 5f, false); return c; }, 56);
+            SaveSurfaceIfMissing("UI/ui_btn_sun", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Canvas2D.Hex("FFE08A"), Canvas2D.Hex("E9C368"), 34f, 5f, false); return c; }, 56);
+            SaveSurfaceIfMissing("UI/ui_btn_ghost", () => { var c = new Canvas2D(256, 128, 2); UIAssets.Panel(c, Canvas2D.Hex("FFFFFF", 0.55f), Canvas2D.Hex("FFFFFF", 0.85f), 34f, 4f, false); return c; }, 56);
 
             // cards
             Save("UI/ui_card", () => { var c = new Canvas2D(300, 300, 2); UIAssets.CardSurface(c, false); return c; }, 64);
-            Save("UI/ui_card_frame", () => { var c = new Canvas2D(300, 300, 2); UIAssets.SelectionFrame(c); return c; }, 64);
+            SaveSurfaceIfMissing("UI/ui_card_frame", () => { var c = new Canvas2D(300, 300, 2); UIAssets.SelectionFrame(c); return c; }, 64);
 
             // misc
-            Save("UI/ui_circle", () => { var c = new Canvas2D(256, 256, 2); UIAssets.SoftCircle(c, Pal.White); return c; }, 0);
-            Save("UI/ui_circle_cream", () => { var c = new Canvas2D(256, 256, 2); UIAssets.SoftCircle(c, Pal.Cream); return c; }, 0);
-            Save("UI/ui_glow", () => { var c = new Canvas2D(256, 256, 2); UIAssets.GlowRing(c, Pal.Sun); return c; }, 0);
-            Save("UI/ui_check", () => { var c = new Canvas2D(128, 128, 2); UIAssets.CheckMark(c, Pal.Teal); return c; }, 0);
-            Save("UI/ui_dot", () => { var c = new Canvas2D(64, 64, 2); c.Circle(32f, 32f, 28f, Pal.White); return c; }, 0);
+            SaveSurfaceIfMissing("UI/ui_circle", () => { var c = new Canvas2D(256, 256, 2); UIAssets.SoftCircle(c, Pal.White); return c; }, 0);
+            SaveSurfaceIfMissing("UI/ui_circle_cream", () => { var c = new Canvas2D(256, 256, 2); UIAssets.SoftCircle(c, Pal.Cream); return c; }, 0);
+            SaveSurfaceIfMissing("UI/ui_glow", () => { var c = new Canvas2D(256, 256, 2); UIAssets.GlowRing(c, Pal.Sun); return c; }, 0);
+            SaveSurfaceIfMissing("UI/ui_check", () => { var c = new Canvas2D(128, 128, 2); UIAssets.CheckMark(c, Pal.Teal); return c; }, 0);
+            SaveSurfaceIfMissing("UI/ui_dot", () => { var c = new Canvas2D(64, 64, 2); c.Circle(32f, 32f, 28f, Pal.White); return c; }, 0);
             Save("UI/ui_vignette", () =>
             {
                 var c = new Canvas2D(512, 512, 1);
                 c.Clear(new Color32(0, 0, 0, 0));
                 return c;
             }, 0);
+        }
+
+        // Supplied UI paintings are the primary assets. The procedural art is a fallback.
+        static void SaveSurfaceIfMissing(string key, CanvasFactory factory, int border = 0)
+        {
+            if (!File.Exists(FindPath(key)))
+                Save(key, factory, border);
         }
 
         // ------------------------------------------------------------------ save

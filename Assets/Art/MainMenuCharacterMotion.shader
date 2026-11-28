@@ -83,53 +83,47 @@ Shader "MoodieLand/Main Menu Character Motion"
                 return 1.0 - smoothstep(0.80, 1.0, length((pixel - center) / radius));
             }
 
-            fixed4 Wave(float2 pixel, fixed4 standing, bool pip)
+            fixed4 Pip(float2 pixel)
             {
-                // The two gesture sprites include full expressions. Restrict the
-                // composite to the near arm and its attachment to the chest.
-                float y = pixel.y;
-                float shoulder = smoothstep(214.0, 315.0, y);
-                float seam = pip ? lerp(139.0, 220.0, shoulder) : lerp(157.0, 221.0, shoulder);
-                float lower = smoothstep(309.0, 365.0, y);
-                seam += (pip ? 17.0 : 9.0) * lower;
-                float rearFoot = pip ? 178.0 : 193.0;
-                float keepRearFoot = smoothstep(354.0, 393.0, y)
-                    * (1.0 - smoothstep(rearFoot - 8.0, rearFoot + 8.0, pixel.x));
-                float mask = (1.0 - smoothstep(seam - 5.0, seam + 5.0, pixel.x))
-                    * smoothstep(pip ? 186.0 : 222.0, pip ? 196.0 : 235.0, y)
-                    * (1.0 - keepRearFoot);
-
-                float2 palm = pip ? float2(135.0, 234.0) : float2(133.0, 261.0);
-                float wrist = InsideEllipse(pixel, palm, float2(69.0, 84.0));
-                float2 source = pixel - float2(pip ? 34.0 : 3.0, 0.0);
-                source -= float2(9.0, -4.0) * (_Motion.y * wrist);
-                return lerp(standing, SampleArt(_PoseTex, source), mask * _Motion.x);
+                float paw = InsideEllipse(pixel, float2(355.0, 260.0), float2(52.0, 47.0))
+                    * smoothstep(326.0, 359.0, pixel.x)
+                    * smoothstep(236.0, 253.0, pixel.y);
+                float scarf = InsideEllipse(pixel, float2(204.0, 293.0), float2(39.0, 36.0))
+                    * (1.0 - smoothstep(197.0, 221.0, pixel.x));
+                float2 offset = _Motion.x * (float2(5.0, -9.0) * paw + float2(-2.0, 3.0) * scarf);
+                return lerp(SampleArt(_PoseTex, pixel), SampleArt(_MainTex, pixel - offset), _Motion.w);
             }
 
             fixed4 Mimi(float2 pixel)
             {
-                // Taper motion to zero where the tail meets the face and body.
-                float boundary = lerp(327.0, 298.0, smoothstep(324.0, 403.0, pixel.y));
-                float tail = smoothstep(boundary, boundary + 75.0, pixel.x)
-                    * (1.0 - smoothstep(320.0, 421.0, pixel.y));
-                float2 offset = float2(20.0, -17.0) * (_Motion.x * tail);
+                // Fade the displacement to zero along the overlap with the cheeks and torso.
+                float boundary = lerp(274.0, 262.0, smoothstep(260.0, 392.0, pixel.y));
+                float tail = smoothstep(boundary, boundary + 67.0, pixel.x)
+                    * smoothstep(121.0, 156.0, pixel.y)
+                    * (1.0 - smoothstep(330.0, 420.0, pixel.y));
+                return SampleArt(_MainTex, pixel - float2(10.0, -8.0) * (_Motion.x * tail));
+            }
 
-                // Center the gaze inside the two existing eye openings.
-                offset += float2(-8.0, 6.0) * InsideEllipse(pixel, float2(199.0, 195.0), float2(27.0, 30.0));
-                offset += float2(-3.0, 5.0) * InsideEllipse(pixel, float2(290.0, 174.0), float2(24.0, 25.0));
-                return SampleArt(_MainTex, pixel - offset);
+            fixed4 Bobo(float2 pixel)
+            {
+                float ears = 1.0 - smoothstep(72.0, 145.0, pixel.y);
+                pixel -= float2(4.0, 3.0) * (_Motion.y * ears);
+                fixed4 standing = SampleArt(_MainTex, pixel);
+                float arm = smoothstep(219.0, 230.0, pixel.y)
+                    * (1.0 - smoothstep(342.0, 360.0, pixel.y))
+                    * (1.0 - smoothstep(227.0, 243.0, pixel.x));
+                float paw = 1.0 - smoothstep(170.0, 200.0, pixel.x);
+                fixed4 waving = SampleArt(_PoseTex, pixel - float2(4.0, -3.0) * (_Motion.z * paw));
+                return lerp(standing, waving, arm * _Motion.x);
             }
 
             fixed4 Nunu(float2 pixel, fixed4 standing)
             {
-                float leftEye = InsideEllipse(pixel, float2(180.0, 204.0), float2(34.0, 36.0))
-                    * smoothstep(172.0, 180.0, pixel.y);
-                float rightEye = InsideEllipse(pixel, float2(260.0, 201.0), float2(35.0, 36.0))
-                    * smoothstep(168.0, 177.0, pixel.y);
-                fixed4 face = lerp(standing, SampleArt(_PoseTex, pixel + float2(-3.0, 3.0)), leftEye * _Motion.x);
-                face = lerp(face, SampleArt(_PoseTex, pixel + float2(3.0, -1.0)), rightEye * _Motion.x);
-                float mouth = InsideEllipse(pixel, float2(221.0, 240.0), float2(25.0, 12.0));
-                return lerp(face, SampleArt(_PoseTex, pixel + float2(8.0, 0.0)), mouth * _Motion.y);
+                float leftEye = InsideEllipse(pixel, float2(179.0, 185.0), float2(18.0, 19.0));
+                float rightEye = InsideEllipse(pixel, float2(260.0, 205.0), float2(18.0, 19.0));
+                float mouth = InsideEllipse(pixel, float2(213.0, 215.0), float2(30.0, 21.0));
+                return lerp(standing, SampleArt(_PoseTex, pixel),
+                    saturate((leftEye + rightEye) * _Motion.x + mouth * _Motion.y));
             }
 
             fixed4 Frag(Varyings input) : SV_Target
@@ -137,11 +131,11 @@ Shader "MoodieLand/Main Menu Character Motion"
                 float2 pixel = float2(input.uv.x, 1.0 - input.uv.y) * 480.0;
                 fixed4 color = SampleArt(_MainTex, pixel);
                 if (_Character < 0.5)
-                    color = Wave(pixel, color, true);
+                    color = Pip(pixel);
                 else if (_Character < 1.5)
                     color = Mimi(pixel);
                 else if (_Character < 2.5)
-                    color = Wave(pixel, color, false);
+                    color = Bobo(pixel);
                 else
                     color = Nunu(pixel, color);
 

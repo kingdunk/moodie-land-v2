@@ -25,7 +25,7 @@ namespace MoodieLand
         public static readonly Color InkSoft = new Color32(0x7A, 0x6E, 0x64, 0xFF);
         public static readonly Color Cream = new Color32(0xFF, 0xF6, 0xE9, 0xFF);
         public static readonly Color Paper = new Color32(0xFF, 0xFC, 0xF6, 0xFF);
-        public static readonly Color Teal = new Color32(0x39, 0x9C, 0x91, 0xFF);
+        public static readonly Color Teal = new Color32(0x2E, 0x62, 0x59, 0xFF);
         public static readonly Color Peach = new Color32(0xFF, 0xC7, 0xA8, 0xFF);
         public static readonly Color Pink = new Color32(0xF7, 0xA8, 0xB2, 0xFF);
         public static readonly Color Lavender = new Color32(0xC7, 0xCE, 0xEA, 0xFF);

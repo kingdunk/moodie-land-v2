@@ -218,10 +218,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -516,10 +516,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 579090727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -790, y: 46}
-  m_SizeDelta: {x: 270, y: 270}
+  m_AnchorMin: {x: 0.06, y: 0}
+  m_AnchorMax: {x: 0.06, y: 0}
+  m_AnchoredPosition: {x: 210, y: 275}
+  m_SizeDelta: {x: 230, y: 230}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &86306880
 MonoBehaviour:
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 07b3fe6d2b881544984baad7104e9b7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33695819e98e4b39a5eb83e439680311, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -576,34 +576,35 @@ MonoBehaviour:
   image: {fileID: 86306880}
   expressions:
   - name: idle
-    sprite: {fileID: 21300000, guid: 07b3fe6d2b881544984baad7104e9b7b, type: 3}
+    sprite: {fileID: 21300000, guid: 33695819e98e4b39a5eb83e439680311, type: 3}
   - name: pointing
-    sprite: {fileID: 21300000, guid: 0576d593f48ace04888618d452680b45, type: 3}
+    sprite: {fileID: 21300000, guid: 8dc21dc6275a40f89fc5d83039a57dab, type: 3}
   - name: waving
-    sprite: {fileID: 21300000, guid: 31c6ae9ea1addc9468e67650c1aec6b2, type: 3}
+    sprite: {fileID: 21300000, guid: bf976054bfab4333b73eb86049a483fd, type: 3}
   - name: thinking
-    sprite: {fileID: 21300000, guid: 31aae45916c98f24ebc45f56d2309f23, type: 3}
+    sprite: {fileID: 21300000, guid: 71057a2d40234b6a9610ad773dc9952e, type: 3}
   - name: happy
-    sprite: {fileID: 21300000, guid: 30f835f2626b2bb4c935d6648b2de670, type: 3}
+    sprite: {fileID: 21300000, guid: cf2023ad14394787be12a1410c5e9b6c, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: 26b759588006e3f428b2c4545478ce66, type: 3}
+    sprite: {fileID: 21300000, guid: 33695819e98e4b39a5eb83e439680311, type: 3}
   heads:
   - name: idle
-    sprite: {fileID: 21300000, guid: 2ec4f662e10073142a755eedf43c1e12, type: 3}
+    sprite: {fileID: 21300000, guid: feeb23ac11a94b67b4f992d55ca3962f, type: 3}
   - name: pointing
-    sprite: {fileID: 21300000, guid: 7baf5d12b32b22f4dac23ec6386a9c8b, type: 3}
+    sprite: {fileID: 21300000, guid: 0213371774fd46638cff31d0d8f3e3e8, type: 3}
   - name: waving
-    sprite: {fileID: 21300000, guid: 7c2cd28de29fa154592c3d52899733b4, type: 3}
+    sprite: {fileID: 21300000, guid: 73249591b7f8406ebd6f1f5ead4f2918, type: 3}
   - name: thinking
-    sprite: {fileID: 21300000, guid: 3afb16abbeae7c14290630f133989bb4, type: 3}
+    sprite: {fileID: 21300000, guid: f650cc38befe4269839bd41699d3df45, type: 3}
   - name: happy
-    sprite: {fileID: 21300000, guid: fbbb06d3749c8374280f49eee2e7cb17, type: 3}
+    sprite: {fileID: 21300000, guid: 4f7e72b357df4ec1a7a02e208e19654b, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: b712cbfd4a6f4a34b9213c1100979818, type: 3}
+    sprite: {fileID: 21300000, guid: feeb23ac11a94b67b4f992d55ca3962f, type: 3}
   idleBob: 1
   bobAmplitude: 6
   bobSpeed: 1.6
   faceLeft: 0
+  watercolorMotion: 1
 --- !u!1 &93823430
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,10 +803,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 579090727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 790, y: 46}
-  m_SizeDelta: {x: 270, y: 270}
+  m_AnchorMin: {x: 0.94, y: 0}
+  m_AnchorMax: {x: 0.94, y: 0}
+  m_AnchoredPosition: {x: -121, y: 244}
+  m_SizeDelta: {x: 230, y: 230}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &99901044
 MonoBehaviour:
@@ -827,7 +828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f82b70621ae84f2469ed4703774b8bd0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4fce63ff60c34545ab9b2542e14497fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -862,34 +863,39 @@ MonoBehaviour:
   image: {fileID: 99901044}
   expressions:
   - name: idle
-    sprite: {fileID: 21300000, guid: f82b70621ae84f2469ed4703774b8bd0, type: 3}
+    sprite: {fileID: 21300000, guid: 4fce63ff60c34545ab9b2542e14497fc, type: 3}
   - name: listening
-    sprite: {fileID: 21300000, guid: 9a263915145c4d048a4596a4462c1eb6, type: 3}
+    sprite: {fileID: 21300000, guid: cfb3ddd1c10f49dfa78ed622928b274d, type: 3}
   - name: thinking
-    sprite: {fileID: 21300000, guid: 148f466254cce4d4db30ae8a108f7987, type: 3}
+    sprite: {fileID: 21300000, guid: c2b97039913244b0b5ec76b883601061, type: 3}
   - name: worried
-    sprite: {fileID: 21300000, guid: 52dbe7d3e0639244abf13346bf96087d, type: 3}
+    sprite: {fileID: 21300000, guid: 86024052c9f14768a0bf5e3e80b814f1, type: 3}
   - name: relieved
-    sprite: {fileID: 21300000, guid: e86c499035e8f5a499e8d100e7fd5f7c, type: 3}
+    sprite: {fileID: 21300000, guid: 96ccabafafd647ca92a35a29d179a378, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: 008b46bf97db2e84c9b4a37daebc8216, type: 3}
+    sprite: {fileID: 21300000, guid: d80494d00415404baf53b3608a6a9586, type: 3}
+  - name: happy
+    sprite: {fileID: 21300000, guid: 039f6692058d487980c1ee3a1aa08d03, type: 3}
   heads:
   - name: idle
-    sprite: {fileID: 21300000, guid: 3c8c7c57496735144897073e791d42b5, type: 3}
+    sprite: {fileID: 21300000, guid: e020f95f311c4b388c46c2f7a222ac59, type: 3}
   - name: listening
-    sprite: {fileID: 21300000, guid: d47d73b4e9ac8ce4690a5a2d9601466e, type: 3}
+    sprite: {fileID: 21300000, guid: cdda66f3257d406d98f1bda708928c27, type: 3}
   - name: thinking
-    sprite: {fileID: 21300000, guid: a79f704c7ef748b46a551eb1d025700c, type: 3}
+    sprite: {fileID: 21300000, guid: 9d298fe918fa4037a5df66d1080c94e3, type: 3}
   - name: worried
-    sprite: {fileID: 21300000, guid: 2d7e7c32f95348044a7826390984ec0f, type: 3}
+    sprite: {fileID: 21300000, guid: 5a47265cc7a242bdb4e9ffcc45bcd649, type: 3}
   - name: relieved
-    sprite: {fileID: 21300000, guid: 9ca3236e0df5ef14e937b3463fbe4e16, type: 3}
+    sprite: {fileID: 21300000, guid: 53dadc83b9214cf59811c6b80d1194bc, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: 63fa13cfda05d074b8ae154087c63fe2, type: 3}
+    sprite: {fileID: 21300000, guid: 52ec29b4266d4c98a41594bb436ea90e, type: 3}
+  - name: happy
+    sprite: {fileID: 21300000, guid: 214ea14bbcee4270bc732cfb5c9e7e9b, type: 3}
   idleBob: 1
   bobAmplitude: 6
   bobSpeed: 1.6
-  faceLeft: 1
+  faceLeft: 0
+  watercolorMotion: 1
 --- !u!1 &155754543
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +940,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 42
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1106,7 +1112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1177,7 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1476,7 +1482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 718304409dd01004087d5493a04d6b04, type: 3}
+  m_Sprite: {fileID: -256102989232369219, guid: 570d0093d5d10064896ca0079e51a5a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2520,10 +2526,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -2671,7 +2677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2874,10 +2880,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -2979,7 +2985,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 44
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3190,10 +3196,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -3401,10 +3407,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -3500,10 +3506,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -3713,7 +3719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4117,8 +4123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 620, y: 620}
+  m_AnchoredPosition: {x: 0, y: 180}
+  m_SizeDelta: {x: 460, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &806407387
 MonoBehaviour:
@@ -4140,7 +4146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89874d40d38bcc24abd9889a8dd3cd7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd2355be26c4419a96179c75d6e8715c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4372,10 +4378,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -4435,10 +4441,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -5081,10 +5087,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -5144,10 +5150,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -5516,7 +5522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5878,10 +5884,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 579090727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 540, y: 46}
-  m_SizeDelta: {x: 270, y: 270}
+  m_AnchorMin: {x: 0.848, y: 0}
+  m_AnchorMax: {x: 0.848, y: 0}
+  m_AnchoredPosition: {x: -260, y: 244}
+  m_SizeDelta: {x: 230, y: 230}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1078015361
 MonoBehaviour:
@@ -5903,7 +5909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2f560dd45dae87747b7f4727339d1a10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24f81ebd00724e649e16e9bd4e1327fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5938,34 +5944,39 @@ MonoBehaviour:
   image: {fileID: 1078015361}
   expressions:
   - name: idle
-    sprite: {fileID: 21300000, guid: 2f560dd45dae87747b7f4727339d1a10, type: 3}
+    sprite: {fileID: 21300000, guid: 24f81ebd00724e649e16e9bd4e1327fb, type: 3}
   - name: building
-    sprite: {fileID: 21300000, guid: ee867f1d5cfe340449c4b9267fcd9754, type: 3}
+    sprite: {fileID: 21300000, guid: 5e78a35969c0438a9c58347de6646454, type: 3}
   - name: listening
-    sprite: {fileID: 21300000, guid: 2fa0df1d2c9c4e74b884564fa54bdaf8, type: 3}
+    sprite: {fileID: 21300000, guid: 86833b0931fb4649bb27b354d596939a, type: 3}
   - name: happy
-    sprite: {fileID: 21300000, guid: e27f083761c6d2c4488d5b2e68641954, type: 3}
+    sprite: {fileID: 21300000, guid: 0c7015130d2a4d3281e432bfc855c903, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: 024191c04e5a98c4a8abd957677311c9, type: 3}
+    sprite: {fileID: 21300000, guid: aefd9d9d5a9f495784cc052dfd0b445c, type: 3}
   - name: disappointed
-    sprite: {fileID: 21300000, guid: f2d8243085c3a49489d54edb3481e863, type: 3}
+    sprite: {fileID: 21300000, guid: b3f3e689f7224e9cb65f8e5637eba0a2, type: 3}
+  - name: celebrating
+    sprite: {fileID: 21300000, guid: 0c7015130d2a4d3281e432bfc855c903, type: 3}
   heads:
   - name: idle
-    sprite: {fileID: 21300000, guid: 26d69ebbd9f45754d90dea6d734b3bbc, type: 3}
+    sprite: {fileID: 21300000, guid: 01e5513930ad419d94a4029c89047d21, type: 3}
   - name: building
-    sprite: {fileID: 21300000, guid: 2c2b0c329fd327848ab2ff1faebadbbb, type: 3}
+    sprite: {fileID: 21300000, guid: 4c6e0db4a5bd479ab6065b41b6140cae, type: 3}
   - name: listening
-    sprite: {fileID: 21300000, guid: e0d881ccc8d941e498d0632b1f18177d, type: 3}
+    sprite: {fileID: 21300000, guid: 9574cb6a0d124e31923c41ba0a2ff5df, type: 3}
   - name: happy
-    sprite: {fileID: 21300000, guid: 78fa627bec1e54d41a23a1f552723297, type: 3}
+    sprite: {fileID: 21300000, guid: de15d12ab78b4520b824c1633485b1bf, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: aa366bdc24c8413449c5be4b956889fb, type: 3}
+    sprite: {fileID: 21300000, guid: da85c2c3029b4978a019fb551c63afa9, type: 3}
   - name: disappointed
-    sprite: {fileID: 21300000, guid: d53dd71fe490029408a1a2d9f3d827fd, type: 3}
+    sprite: {fileID: 21300000, guid: ab0de6c0088442049eb6521be764f51f, type: 3}
+  - name: celebrating
+    sprite: {fileID: 21300000, guid: de15d12ab78b4520b824c1633485b1bf, type: 3}
   idleBob: 1
   bobAmplitude: 6
   bobSpeed: 1.6
-  faceLeft: 1
+  faceLeft: 0
+  watercolorMotion: 1
 --- !u!1 &1081608316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6029,7 +6040,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 46
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -6223,10 +6234,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -6756,10 +6767,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -7025,7 +7036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.6117647, b: 0.5686275, a: 1}
+  m_Color: {r: 0.18039216, g: 0.38431373, b: 0.34901962, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7293,7 +7304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.96, b: 0.78, a: 0.7}
+  m_Color: {r: 1, g: 0.96, b: 0.78, a: 0.2}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7335,7 +7346,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 820, y: 820}
+  m_SizeDelta: {x: 650, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1320518722
 GameObject:
@@ -7563,7 +7574,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 52
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -7722,10 +7733,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -7881,10 +7892,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -8178,10 +8189,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -9613,10 +9624,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -9896,10 +9907,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -10402,10 +10413,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:
@@ -10457,10 +10468,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 579090727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -540, y: 46}
-  m_SizeDelta: {x: 270, y: 270}
+  m_AnchorMin: {x: 0.152, y: 0}
+  m_AnchorMax: {x: 0.152, y: 0}
+  m_AnchoredPosition: {x: 300, y: 269}
+  m_SizeDelta: {x: 230, y: 230}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2019566882
 MonoBehaviour:
@@ -10482,7 +10493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 704c62d060a14724ea5f2661281215a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4302096218c540cfae3db71e02aad1d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10517,34 +10528,39 @@ MonoBehaviour:
   image: {fileID: 2019566882}
   expressions:
   - name: idle
-    sprite: {fileID: 21300000, guid: 704c62d060a14724ea5f2661281215a6, type: 3}
+    sprite: {fileID: 21300000, guid: 4302096218c540cfae3db71e02aad1d8, type: 3}
   - name: searching
-    sprite: {fileID: 21300000, guid: 43c3df3cc0cf5e045b27f6c66286fd48, type: 3}
+    sprite: {fileID: 21300000, guid: 6eaade08ab374ebfac505386645797c1, type: 3}
   - name: worried
-    sprite: {fileID: 21300000, guid: bbae7790ccb5e034fb8a1919f7289823, type: 3}
+    sprite: {fileID: 21300000, guid: e8710a7bd6884a00823070af1a1d4b4d, type: 3}
   - name: frustrated
-    sprite: {fileID: 21300000, guid: 350917ae226299140bf9aa4e7df9fd36, type: 3}
+    sprite: {fileID: 21300000, guid: 2b3ef65be70445e9a39e180068ddf892, type: 3}
   - name: happy
-    sprite: {fileID: 21300000, guid: ca9c1332d0a442a4bb78dc45b1efe92e, type: 3}
+    sprite: {fileID: 21300000, guid: ecc0b8f83e2543cd97d714644250b773, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: 4e9ab69376356634cb81a7f51f6232ec, type: 3}
+    sprite: {fileID: 21300000, guid: 4302096218c540cfae3db71e02aad1d8, type: 3}
+  - name: celebrating
+    sprite: {fileID: 21300000, guid: ecc0b8f83e2543cd97d714644250b773, type: 3}
   heads:
   - name: idle
-    sprite: {fileID: 21300000, guid: 299aa96b64403794193d57da2ab380aa, type: 3}
+    sprite: {fileID: 21300000, guid: 24239c47f2c3400ca131ab38707f4adf, type: 3}
   - name: searching
-    sprite: {fileID: 21300000, guid: 6aca23325b09b26419e738f18536c9b9, type: 3}
+    sprite: {fileID: 21300000, guid: 0938430da7184df1aa4455722c454dc4, type: 3}
   - name: worried
-    sprite: {fileID: 21300000, guid: 7f5d0d86a1fd31d4aa386312aaf58e1a, type: 3}
+    sprite: {fileID: 21300000, guid: 72f7964af9874cd1af2b4bb60e89189d, type: 3}
   - name: frustrated
-    sprite: {fileID: 21300000, guid: 4528bd2e16cc30a4a9abb45542ba18ba, type: 3}
+    sprite: {fileID: 21300000, guid: 8c941d01b3c443a39b3f547d3faa277c, type: 3}
   - name: happy
-    sprite: {fileID: 21300000, guid: 81f2b2e44489d7f4bae0ab066b659a00, type: 3}
+    sprite: {fileID: 21300000, guid: 23a1f99a141b453684eb6b6998712703, type: 3}
   - name: calm
-    sprite: {fileID: 21300000, guid: 74500ab4da3d2024c8dad0e46b993511, type: 3}
+    sprite: {fileID: 21300000, guid: 24239c47f2c3400ca131ab38707f4adf, type: 3}
+  - name: celebrating
+    sprite: {fileID: 21300000, guid: 23a1f99a141b453684eb6b6998712703, type: 3}
   idleBob: 1
   bobAmplitude: 6
   bobSpeed: 1.6
   faceLeft: 0
+  watercolorMotion: 1
 --- !u!1 &2034155981
 GameObject:
   m_ObjectHideFlags: 0
@@ -10586,10 +10602,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.93}
-    m_PressedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 0.6}
+    m_HighlightedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_PressedColor: {r: 0.86, g: 0.89, b: 0.86, a: 1}
+    m_SelectedColor: {r: 0.94, g: 0.97, b: 0.94, a: 1}
+    m_DisabledColor: {r: 0.82, g: 0.84, b: 0.82, a: 0.88}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:

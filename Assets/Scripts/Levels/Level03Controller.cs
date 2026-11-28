@@ -47,7 +47,7 @@ namespace MoodieLand
                 new DialogueLine("nunu", "Nunu", "The clouds are rumbling today... I feel a lot of things.", "worried"),
                 new DialogueLine("pip", "Pip", "This is Nunu. Nunu can use the Feelings Board to show what is going on.", "pointing"),
                 new DialogueLine("nunu", "Nunu", "Will you try it with me? You can keep your message private if you want.", "listening"),
-                new DialogueLine("pip", "Pip", "You decide what to share. Let's open the board.", "waving")
+                new DialogueLine("pip", "Pip", "You decide what to share. Let's open the board.", "inviting")
             );
 
             yield return BoardRoutine();
@@ -158,6 +158,7 @@ namespace MoodieLand
                         () => { changeRequested = true; decided = true; });
 
                 while (!decided) yield return null;
+                while (messagePanel != null && messagePanel.IsVisible) yield return null;
 
                 if (changeRequested)
                 {
@@ -193,7 +194,7 @@ namespace MoodieLand
             {
                 yield return Say(
                     new DialogueLine("nunu", "Nunu", "Yes... worried. The loud clouds make my chest feel tight.", "worried"),
-                    new DialogueLine("pip", "Pip", "You noticed Nunu's feeling. That is empathy too.", "happy"));
+                    new DialogueLine("pip", "Pip", "You noticed Nunu's feeling. That is empathy too.", "nodding"));
                 Praise("Noticing others counts!");
             }
             else
@@ -302,7 +303,7 @@ namespace MoodieLand
             else if (decision == 2)
             {
                 yield return Say(
-                    new DialogueLine("pip", "Pip", "That's okay! Your message is yours.", "happy"),
+                    new DialogueLine("pip", "Pip", "That's okay! Your message is yours.", "nodding"),
                     new DialogueLine("nunu", "Nunu", "You can keep it. I am glad you made it for yourself.", "listening"),
                     DialogueLine.Narrator("You fold the little message and put it in your pocket."));
             }

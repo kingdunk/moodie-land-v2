@@ -133,7 +133,7 @@ namespace MoodieLand.EditorTools
 
             // shown only when there is a save, so a new journey is not a surprise wipe
             var note = UIK.Label(kit.root.transform, "NewGameNote",
-                "Begin starts a new journey  ·  saved badges will be cleared",
+                "Begin starts a new journey  路  saved badges will be cleared",
                 21, MoodieUI.InkSoft, TextAnchor.MiddleCenter,
                 UIK.BC, new Vector2(0f, 148f), new Vector2(900f, 34f));
             note.gameObject.SetActive(false);
@@ -175,11 +175,11 @@ namespace MoodieLand.EditorTools
             kit.cards.gameObject.SetActive(false);
             kit.hint.gameObject.SetActive(false);
 
-            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(330f, 320f), new Vector2(370f, 370f));
+            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(330f, 320f), new Vector2(370f, 370f), watercolor: true);
             SceneKit.RegisterCharacters(kit, kit.dialogue);
 
-            var boat = UIK.Img(kit.props, "CloudBoat", ArtGen.Get("Props/prop_boat"), Color.white,
-                UIK.BC, new Vector2(-180f, 520f), new Vector2(560f, 560f), false, true);
+            var boat = UIK.Img(kit.props, "CloudBoat", ArtGen.Get("Props/prop_boat_watercolor"), Color.white,
+                UIK.BC, new Vector2(-500f, 722f), new Vector2(300f, 300f), false, true);
             boat.transform.SetSiblingIndex(0);
 
             var startGroup = UIK.Node(kit.root.transform, "StartGroup", UIK.BC, new Vector2(-380f, 150f), new Vector2(460f, 110f));
@@ -205,14 +205,19 @@ namespace MoodieLand.EditorTools
             var scene = NewScene();
             var kit = SceneKit.Build("Backgrounds/bg_harbor", "Moodie Harbor", new[] { "pip" }, false);
 
-            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-300f, 344f), new Vector2(210f, 210f));
+            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-300f, 344f), new Vector2(210f, 210f), watercolor: true, idleArt: "pip_waiting");
             SceneKit.RegisterCharacters(kit, kit.dialogue);
 
-            var tree = UIK.Img(kit.props, "MoodTree", ArtGen.Get("Props/prop_moodtree"), Color.white,
-                UIK.BC, new Vector2(0f, 470f), new Vector2(560f, 560f), false, true);
+            var tree = UIK.Img(kit.props, "MoodTree", ArtGen.Get("Props/prop_moodtree_watercolor"), Color.white,
+                UIK.BC, new Vector2(0f, 570f), new Vector2(340f, 340f), false, true);
             tree.transform.SetSiblingIndex(0);
 
-            string[] portalKeys = { "Props/portal_forest", "Props/portal_village", "Props/portal_cove" };
+            string[] portalKeys =
+            {
+                "Props/portal_forest_watercolor",
+                "Props/portal_village_watercolor",
+                "Props/portal_cove_watercolor"
+            };
             string[] names = { "Rainbow Forest", "Blocky Village", "Cloudy Cove" };
             float[] xs = { -620f, 0f, 620f };
 
@@ -275,8 +280,8 @@ namespace MoodieLand.EditorTools
             var scene = NewScene();
             var kit = SceneKit.Build("Backgrounds/bg_forest", "Rainbow Forest", new[] { "pip", "mimi" });
 
-            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-660f, 236f), new Vector2(330f, 330f));
-            var mimi = SceneKit.AddCharacter(kit, "mimi", "Mimi", new Vector2(650f, 236f), new Vector2(330f, 330f), true);
+            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-660f, 236f), new Vector2(330f, 330f), watercolor: true);
+            var mimi = SceneKit.AddCharacter(kit, "mimi", "Mimi", new Vector2(650f, 236f), new Vector2(330f, 330f), watercolor: true);
             SceneKit.RegisterCharacters(kit, kit.dialogue);
 
             // stage 0: the mushroom house, stage 1: fallen tower, stage 2: basket found
@@ -290,9 +295,9 @@ namespace MoodieLand.EditorTools
                 new Vector2(-60f, 236f), new Vector2(300f, 300f));
 
             // three clickable clue cards
-            var clueFace = SceneKit.AddClickable(kit.props, "Clue_Face", "Props/clue_face",
+            var clueFace = SceneKit.AddClickable(kit.props, "Clue_Face", "Characters/NewWatercolor/clue_face",
                 new Vector2(-470f, 566f), new Vector2(240f, 240f), "Face", new Vector2(0f, -34f));
-            var clueBody = SceneKit.AddClickable(kit.props, "Clue_Body", "Props/clue_body",
+            var clueBody = SceneKit.AddClickable(kit.props, "Clue_Body", "Characters/NewWatercolor/clue_body",
                 new Vector2(0f, 566f), new Vector2(240f, 240f), "Body", new Vector2(0f, -34f));
             var clueSit = SceneKit.AddClickable(kit.props, "Clue_Situation", "Props/clue_situation",
                 new Vector2(470f, 566f), new Vector2(240f, 240f), "Situation", new Vector2(0f, -34f));
@@ -349,55 +354,36 @@ namespace MoodieLand.EditorTools
             var scene = NewScene();
             var kit = SceneKit.Build("Backgrounds/bg_village", "Blocky Village", new[] { "pip", "bobo" });
 
-            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-700f, 232f), new Vector2(320f, 320f));
-            var bobo = SceneKit.AddCharacter(kit, "bobo", "Bobo", new Vector2(640f, 232f), new Vector2(340f, 340f), true);
+            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-700f, 232f), new Vector2(320f, 320f), watercolor: true);
+            var bobo = SceneKit.AddCharacter(kit, "bobo", "Bobo", new Vector2(640f, 232f), new Vector2(340f, 340f), watercolor: true);
             SceneKit.RegisterCharacters(kit, kit.dialogue);
 
             var castle = SceneKit.AddProp(kit.props, "Castle", "Props/prop_castle",
-                new Vector2(-90f, 236f), new Vector2(320f, 320f));
+                new Vector2(277f, 236f), new Vector2(320f, 320f));
             var broken = SceneKit.AddProp(kit.props, "CastleBroken", "Props/prop_castlebroken",
                 new Vector2(-90f, 236f), new Vector2(320f, 320f));
 
-            // building blocks revealed one by one
+            // Individual watercolor blocks in their bottom-to-top landing order.
             var blocks = new GameObject[6];
             Vector2[] blockPos =
             {
-                new Vector2(-190f, 236f), new Vector2(-90f, 236f), new Vector2(10f, 236f),
-                new Vector2(-140f, 320f), new Vector2(-40f, 320f),
-                new Vector2(-90f, 404f)
+                new Vector2(-166f, 236f), new Vector2(-90f, 236f), new Vector2(-14f, 236f),
+                new Vector2(-128f, 312f), new Vector2(-52f, 312f),
+                new Vector2(-90f, 388f)
             };
-            Color[] blockCols =
-            {
-                new Color(0.97f, 0.66f, 0.70f), new Color(0.66f, 0.90f, 0.81f), new Color(0.78f, 0.81f, 0.92f),
-                new Color(1f, 0.78f, 0.66f), new Color(1f, 0.88f, 0.54f), new Color(0.56f, 0.72f, 0.91f)
-            };
+            string[] blockColors = { "rose", "sage", "mauve", "apricot", "butter", "blue" };
 
             for (int i = 0; i < blockPos.Length; i++)
             {
-                var b = UIK.Img(kit.props, "BuildBlock" + i, ArtGen.Get("UI/ui_card"), blockCols[i],
-                    UIK.BC, blockPos[i], new Vector2(98f, 82f), true);
+                var sprite = ArtGen.Get("Props/prop_buildblock_" + blockColors[i]);
+                var b = UIK.Img(kit.props, "BuildBlock" + i, sprite, Color.white,
+                    UIK.BC, blockPos[i], new Vector2(96f, 96f), false, true);
                 b.gameObject.SetActive(false);
                 blocks[i] = b.gameObject;
             }
 
-            var source = SceneKit.AddClickable(kit.props, "BlueBlock", "Props/prop_blockblue",
-                new Vector2(-640f, 210f), new Vector2(150f, 150f), "Blue block", new Vector2(0f, -20f));
-
-            var slot = SceneKit.AddClickable(kit.props, "CastleSlot", "UI/ui_dot",
-                new Vector2(-90f, 470f), new Vector2(104f, 104f), null);
-            slot.normalTint = new Color(1f, 1f, 1f, 0.4f);
-            AddHighlight(slot);
-
-            source.interactable = false;
-            slot.interactable = false;
-
-            var flight = UIK.Img(kit.props, "PlacedBlock", ArtGen.Get("Props/prop_blockblue"), Color.white,
-                UIK.BC, new Vector2(-90f, 470f), new Vector2(130f, 130f), false, true);
-            flight.gameObject.SetActive(false);
-
-            // stage visibility (0 castle, 1 broken, 2 blocks)
-            var basePlatform = UIK.Img(kit.props, "BuildBase", ArtGen.Get("UI/ui_glow"),
-                new Color(1f, 1f, 1f, 0.5f), UIK.BC, new Vector2(-90f, 150f), new Vector2(620f, 300f), false, true);
+            var puzzlePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/TaskTwoCastlePuzzle.prefab");
+            var puzzle = (GameObject)PrefabUtility.InstantiatePrefab(puzzlePrefab, kit.props);
 
             var lib = kit.root.AddComponent<CardLibrary>();
             FillLibrary(lib);
@@ -405,19 +391,12 @@ namespace MoodieLand.EditorTools
             var ctrl = kit.root.AddComponent<Level02Controller>();
             BindBase(ctrl, kit);
             ctrl.lib = lib;
-            ctrl.sourceBlock = source;
-            ctrl.castleSlot = slot;
+            ctrl.taskTwoPuzzle = puzzle.GetComponent<TaskTwoCastlePuzzle>();
             ctrl.stageCastle = new[] { castle.gameObject };
             ctrl.stageBroken = new[] { broken.gameObject };
-            ctrl.stageBlocks = new[] { basePlatform.gameObject, source.gameObject, slot.gameObject };
             ctrl.castleBlocks = blocks;
-            ctrl.blockFlight = (RectTransform)flight.transform;
 
             broken.gameObject.SetActive(false);
-            basePlatform.gameObject.SetActive(false);
-            source.gameObject.SetActive(false);
-            slot.gameObject.SetActive(false);
-            flight.gameObject.SetActive(false);
 
             SceneKit.BringOverlaysToFront(kit);
             Save(scene, "Level02_BlockyVillage");
@@ -430,8 +409,8 @@ namespace MoodieLand.EditorTools
             var scene = NewScene();
             var kit = SceneKit.Build("Backgrounds/bg_cove", "Cloudy Cove", new[] { "pip", "nunu" });
 
-            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-680f, 232f), new Vector2(320f, 320f));
-            var nunu = SceneKit.AddCharacter(kit, "nunu", "Nunu", new Vector2(620f, 232f), new Vector2(340f, 340f), true);
+            var pip = SceneKit.AddCharacter(kit, "pip", "Pip", new Vector2(-680f, 232f), new Vector2(320f, 320f), watercolor: true);
+            var nunu = SceneKit.AddCharacter(kit, "nunu", "Nunu", new Vector2(620f, 232f), new Vector2(340f, 340f), watercolor: true);
             SceneKit.RegisterCharacters(kit, kit.dialogue);
 
             SceneKit.BuildBoardHeader(kit, kit.root.transform);
@@ -465,17 +444,24 @@ namespace MoodieLand.EditorTools
             var scene = NewScene();
             var kit = SceneKit.Build("Backgrounds/bg_ending", "Moodie Harbor", new[] { "pip", "mimi", "bobo", "nunu" });
 
-            var glow = UIK.CenterImg(kit.props, "TreeGlow", ArtGen.Get("UI/ui_glow"), new Color(1f, 0.96f, 0.78f, 0.7f),
-                new Vector2(0f, 250f), new Vector2(820f, 820f));
-            var tree = UIK.Img(kit.props, "MoodTree", ArtGen.Get("Props/prop_moodtree"), Color.white,
-                UIK.CC, new Vector2(0f, 250f), new Vector2(620f, 620f), false, true);
+            var glow = UIK.CenterImg(kit.props, "TreeGlow", ArtGen.Get("UI/ui_glow"), new Color(1f, 0.96f, 0.78f, 0.2f),
+                new Vector2(0f, 250f), new Vector2(650f, 650f));
+            var tree = UIK.Img(kit.props, "MoodTree", ArtGen.Get("Props/prop_moodtree_watercolor"), Color.white,
+                UIK.CC, new Vector2(0f, 180f), new Vector2(460f, 460f), false, true);
 
             var friends = new List<CharacterView>();
             string[] keys = { "pip", "mimi", "bobo", "nunu" };
-            float[] xs = { -790f, -540f, 540f, 790f };
+            float[] anchors = { 0.06f, 0.152f, 0.848f, 0.94f };
             for (int i = 0; i < keys.Length; i++)
-                friends.Add(SceneKit.AddCharacter(kit, keys[i], keys[i], new Vector2(xs[i], 46f),
-                    new Vector2(270f, 270f), i >= 2));
+            {
+                var friend = SceneKit.AddCharacter(kit, keys[i], keys[i], new Vector2(0f, 46f),
+                    new Vector2(230f, 230f), watercolor: true);
+                var rect = (RectTransform)friend.transform;
+                var anchor = new Vector2(anchors[i], 0f);
+                rect.anchorMin = rect.anchorMax = anchor;
+                rect.anchoredPosition = new Vector2(0f, 46f);
+                friends.Add(friend);
+            }
             SceneKit.RegisterCharacters(kit, kit.dialogue);
 
             // explorer card
@@ -510,7 +496,7 @@ namespace MoodieLand.EditorTools
             msgBg.type = Image.Type.Sliced;
             msgBg.color = Color.white;
 
-            var msgTitle = UIK.Label(msgBlock, "MsgTitle", "My Little Message  ·  shared with Nunu", 21,
+            var msgTitle = UIK.Label(msgBlock, "MsgTitle", "My Little Message  路  shared with Nunu", 21,
                 MoodieUI.Teal, TextAnchor.UpperCenter, UIK.TC, new Vector2(0f, -16f), new Vector2(820f, 32f));
             var msgText = UIK.Label(msgBlock, "MsgText", "", 26, MoodieUI.Ink, TextAnchor.UpperCenter,
                 UIK.TC, new Vector2(0f, -54f), new Vector2(820f, 180f));

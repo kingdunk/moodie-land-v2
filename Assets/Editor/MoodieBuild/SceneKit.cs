@@ -52,7 +52,7 @@ namespace MoodieLand.EditorTools
             rt.sizeDelta = new Vector2(300f, 380f);
 
             var bg = root.GetComponent<Image>();
-            bg.sprite = ArtGen.Get("UI/ui_card");
+            bg.sprite = ArtGen.Get("UI/ui_card_watercolor");
             bg.type = Image.Type.Sliced;
             bg.color = Color.white;
 
@@ -616,7 +616,7 @@ namespace MoodieLand.EditorTools
         // ------------------------------------------------------------ characters
 
         public static CharacterView AddCharacter(Kit kit, string key, string displayName, Vector2 pos, Vector2 size,
-            bool faceLeft = false)
+            bool faceLeft = false, bool watercolor = false, string idleArt = null)
         {
             var go = new GameObject("Char_" + key, typeof(RectTransform), typeof(Image), typeof(CharacterView));
             go.transform.SetParent(kit.characters, false);
@@ -637,18 +637,24 @@ namespace MoodieLand.EditorTools
             view.image = img;
             view.faceLeft = faceLeft;
             view.idleBob = true;
+            view.watercolorMotion = watercolor;
 
-            foreach (var expr in ArtGen.ExpressionsFor(key))
+            var expressions = watercolor ? ArtGen.WatercolorExpressionsFor(key) : ArtGen.ExpressionsFor(key);
+            foreach (var expr in expressions)
             {
                 view.expressions.Add(new ExpressionSprite
                 {
                     name = expr,
-                    sprite = ArtGen.Get("Characters/" + key + "/" + key + "_" + expr)
+                    sprite = watercolor
+                        ? ArtGen.GetWatercolorCharacter(key, expr, false, idleArt)
+                        : ArtGen.Get("Characters/" + key + "/" + key + "_" + expr)
                 });
                 view.heads.Add(new ExpressionSprite
                 {
                     name = expr,
-                    sprite = ArtGen.Get("Characters/" + key + "/" + key + "_" + expr + "_head")
+                    sprite = watercolor
+                        ? ArtGen.GetWatercolorCharacter(key, expr, true, idleArt)
+                        : ArtGen.Get("Characters/" + key + "/" + key + "_" + expr + "_head")
                 });
             }
 

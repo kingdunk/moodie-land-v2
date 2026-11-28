@@ -5,12 +5,15 @@ namespace MoodieLand
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("")]
-    public sealed class PipMotion : BaseMeshEffect
+    public sealed class PipMotion : SpriteMeshMotion
     {
-        const int Grid = 16;
         static readonly Vector2 TailCenter = new Vector2(0.82f, 0.28f);
         static readonly Vector2 WavePaw = new Vector2(0.16f, 0.49f);
         static readonly Vector2 PointPaw = new Vector2(0.85f, 0.47f);
+        static readonly Vector2 WatercolorTail = new Vector2(0.25f, 0.30f);
+        static readonly Vector2 WatercolorPaw = new Vector2(0.74f, 0.46f);
+
+        public bool UseWatercolorArt { get; set; }
 
         string pose;
         float poseStarted;
@@ -43,12 +46,18 @@ namespace MoodieLand
             {
                 case "waving":
                     float wave = Gesture(elapsed, 0.85f) * Mathf.Sin(2f * Mathf.PI * elapsed / 0.28f);
-                    paw = new Vector2(-0.047f, 0.022f) * wave;
+                    paw = new Vector2(UseWatercolorArt ? 0.031f : -0.047f, 0.022f) * wave;
                     break;
                 case "pointing":
+                case "inviting":
                     float reach = Gesture(elapsed, 0.48f);
                     paw = new Vector2(0.026f, 0.011f) * reach;
                     lean = 0.012f * reach;
+                    break;
+                case "nodding":
+                    float nod = Gesture(elapsed, 0.52f);
+                    breath -= 0.027f * nod;
+                    lean += 0.011f * nod;
                     break;
                 case "thinking":
                     lean = -0.019f * Gesture(elapsed, 0.95f);
@@ -74,67 +83,18 @@ namespace MoodieLand
             return playGesture && elapsed < duration ? Mathf.Sin(Mathf.PI * elapsed / duration) : 0f;
         }
 
-        public override void ModifyMesh(VertexHelper mesh)
+        protected override Vector2 Offset(Vector2 point)
         {
-            if (!IsActive() || mesh.currentVertCount != 4)
-                return;
-
-            Rect rect = graphic.rectTransform.rect;
-            if (rect.width <= 0f || rect.height <= 0f)
-                return;
-
-            // Subdivide the simple Image quad to move the paw and tail locally.
-            UIVertex bottomLeft = default;
-            UIVertex topRight = default;
-            mesh.PopulateUIVertex(ref bottomLeft, 0);
-            mesh.PopulateUIVertex(ref topRight, 2);
-            mesh.Clear();
-
-            Vector3 origin = bottomLeft.position;
-            Vector3 size = topRight.position - origin;
-            Vector2 pawCenter = pose == "pointing" ? PointPaw : WavePaw;
-
-            for (int row = 0; row <= Grid; row++)
-            {
-                float v = (float)row / Grid;
-                for (int column = 0; column <= Grid; column++)
-                {
-                    float u = (float)column / Grid;
-                    UIVertex vertex = bottomLeft;
-                    float x = origin.x + size.x * u;
-                    float y = origin.y + size.y * v;
-                    Vector2 point = new Vector2((x - rect.xMin) / rect.width, (y - rect.yMin) / rect.height);
-                    float upper = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.13f, 0.85f, point.y));
-                    float tailWeight = LocalWeight(point, TailCenter, 0.18f)
-                        * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.73f, 0.84f, point.x));
-                    float pawWeight = LocalWeight(point, pawCenter, 0.23f);
-                    vertex.position = new Vector3(
-                        x + rect.width * (lean * upper + tail * tailWeight + paw.x * pawWeight),
-                        y + rect.height * (hop + breath * upper + tail * 0.55f * tailWeight + paw.y * pawWeight),
-                        origin.z);
-                    vertex.uv0 = new Vector4(
-                        Mathf.Lerp(bottomLeft.uv0.x, topRight.uv0.x, u),
-                        Mathf.Lerp(bottomLeft.uv0.y, topRight.uv0.y, v));
-                    mesh.AddVert(vertex);
-                }
-            }
-
-            for (int row = 0; row < Grid; row++)
-            {
-                for (int column = 0; column < Grid; column++)
-                {
-                    int lower = row * (Grid + 1) + column;
-                    int upper = lower + Grid + 1;
-                    mesh.AddTriangle(lower, upper, upper + 1);
-                    mesh.AddTriangle(lower, upper + 1, lower + 1);
-                }
-            }
-        }
-
-        static float LocalWeight(Vector2 point, Vector2 center, float radius)
-        {
-            float strength = Mathf.Clamp01(1f - (point - center).sqrMagnitude / (radius * radius));
-            return strength * strength;
+            Vector2 pawCenter = UseWatercolorArt ? WatercolorPaw : pose == "pointing" ? PointPaw : WavePaw;
+            float upper = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.13f, 0.85f, point.y));
+            float tailWeight = UseWatercolorArt
+                ? LocalWeight(point, WatercolorTail, 0.18f)
+                    * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.41f, 0.24f, point.x))
+                : LocalWeight(point, TailCenter, 0.18f)
+                    * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.73f, 0.84f, point.x));
+            float pawWeight = LocalWeight(point, pawCenter, 0.23f);
+            return new Vector2(lean * upper + tail * tailWeight + paw.x * pawWeight,
+                hop + breath * upper + tail * 0.55f * tailWeight + paw.y * pawWeight);
         }
     }
 }
